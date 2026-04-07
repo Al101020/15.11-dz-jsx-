@@ -15,7 +15,7 @@ export function Counter() {
 
   return (
     <>
-      <div>
+      <div className='marginTop20'>
         <button
           // className={styles.button}
           aria-label="Increment value"

@@ -1,10 +1,17 @@
 import type { JSX } from 'react';// import { interfaceProps } from '../App';
 import { useEffect, useState } from 'react';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { selectMovies } from '../features/resultSearchSlice'; // ---
+import { selectAddMovie } from '../features/resultSearchSlice'; // ---
+
 const HomePage = (): JSX.Element => {
-  const [textInput, setTextInput] = useState('');//
+  const [textInput, setTextInput] = useState('');
   const [search, setSearch] = useState('');
   const [foundMovies, setFoundMovies] = useState([]);
+
+  const movies = useSelector(selectMovies); // --- 
+  console.log(movies);
 
   const handleChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -12,7 +19,7 @@ const HomePage = (): JSX.Element => {
     setTextInput(valueTarget);
   };
 
-  const handleSearch = () => {  // const handleSearch = (e: any) => {
+  const handleSearch = () => {
     setSearch(textInput);
     setTextInput('');    // console.log(search);
   };
@@ -33,7 +40,7 @@ const HomePage = (): JSX.Element => {
         // arr.push(data: any);
         // console.log(arr);
         // setFoundMovies(arr);
-        // setFoundMovies((prevItems): [] => [...prevItems, {data}]);
+        setFoundMovies(data);
       })
       .catch(error => console.error('Fetch error:', error));
     };

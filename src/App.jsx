@@ -7,7 +7,7 @@ import Navbar from './components/Navbar';
 
 import Result from './components/Result';
 
-import { Counter } from './features/Counter';
+// import { Counter } from './features/Counter';
 
 export const App = () => {
 
@@ -22,7 +22,7 @@ export const App = () => {
         <Route path="/favorites" element={<FavoritesPage />} />
       </Routes>
       <Result />
-      <Counter />
+      {/* <Counter /> */}
     </div>
   </div>
 )};

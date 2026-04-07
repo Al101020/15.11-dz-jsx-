@@ -1,18 +1,27 @@
-import type { JSX } from 'react';// import { interfaceProps } from '../App';
+// import type { JSX } from 'react';// import { interfaceProps } from '../App';
 import { useEffect, useState } from 'react';
 
-const HomePage = (): JSX.Element => {
-  const [textInput, setTextInput] = useState('');//
+import { useSelector, useDispatch } from 'react-redux';
+
+
+import { selectMovies } from '../features/resultSearchSlice'; // ---
+import { selectAddMovie } from '../features/resultSearchSlice'; // ---
+
+const HomePage = () => {
+  const [textInput, setTextInput] = useState('');
   const [search, setSearch] = useState('');
   const [foundMovies, setFoundMovies] = useState([]);
 
-  const handleChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const movies = useSelector(selectMovies); // --- 
+  // console.log(movies);
+
+  const handleChangeSearch = (e) => {
     e.preventDefault();
     const valueTarget = e.target.value;
     setTextInput(valueTarget);
   };
 
-  const handleSearch = () => {  // const handleSearch = (e: any) => {
+  const handleSearch = () => {
     setSearch(textInput);
     setTextInput('');    // console.log(search);
   };
@@ -29,11 +38,17 @@ const HomePage = (): JSX.Element => {
       .then(response => response.json())
       .then(data => {
         console.log(data);        // console.log(foundMovies);
+        //
+        console.log(movies);
+        const dispatch = useDispatch(); // кажется нуно вынести в отдельную функцию
+        //
+        // dispatch(selectAddMovie());
+        // console.log(movies);
         // const arr = [...foundMovies];
         // arr.push(data: any);
         // console.log(arr);
         // setFoundMovies(arr);
-        // setFoundMovies((prevItems): [] => [...prevItems, {data}]);
+        setFoundMovies(data);
       })
       .catch(error => console.error('Fetch error:', error));
     };
