@@ -1,19 +1,23 @@
-// import type { JSX } from 'react';// import { interfaceProps } from '../App';
 import { useEffect, useState } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-
 import { selectMovies } from '../features/resultSearchSlice'; // ---
 import { selectAddMovie } from '../features/resultSearchSlice'; // ---
+
+import fetchData from '../api/fetchData';
+
+import { fetchAddMovies } from '../api/fetchData';
+
 
 const HomePage = () => {
   const [textInput, setTextInput] = useState('');
   const [search, setSearch] = useState('');
   const [foundMovies, setFoundMovies] = useState([]);
 
-  const movies = useSelector(selectMovies); // --- 
-  // console.log(movies);
+  const addMovies = useSelector(selectAddMovie);
+
+  const dispatch = useDispatch();
 
   const handleChangeSearch = (e) => {
     e.preventDefault();
@@ -21,38 +25,22 @@ const HomePage = () => {
     setTextInput(valueTarget);
   };
 
+  const apiKey = '64405bd2'; // API-ключ
+
   const handleSearch = () => {
     setSearch(textInput);
     setTextInput('');    // console.log(search);
+
+    console.log('Перед запуском fetchAddMovies');
+    fetchAddMovies(apiKey, textInput, dispatch, addMovies); // ----- запрос НЕ проходит
+    console.log('Перед запуском fetchData');
+    fetchData(apiKey, textInput, dispatch, addMovies); // --- запрос проходит
   };
 
-  const apiKey = '64405bd2'; // замените на ваш API-ключ
-
-  useEffect(() => {
+  useEffect(() => { // - под вопросом.
     if (search === '') {
       return;
-    }    // console.log(search); // setItems(prevItems => [...prevItems, `Элемент ${prevItems.length + 1}`]);
-
-    async function fetchData() {
-      fetch(`https://www.omdbapi.com/?apikey=${apiKey}&t=${search}`)
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);        // console.log(foundMovies);
-        //
-        console.log(movies);
-        const dispatch = useDispatch(); // кажется нуно вынести в отдельную функцию
-        //
-        // dispatch(selectAddMovie());
-        // console.log(movies);
-        // const arr = [...foundMovies];
-        // arr.push(data: any);
-        // console.log(arr);
-        // setFoundMovies(arr);
-        setFoundMovies(data);
-      })
-      .catch(error => console.error('Fetch error:', error));
-    };
-    fetchData();
+    }
   }, [search]);
 
   return (

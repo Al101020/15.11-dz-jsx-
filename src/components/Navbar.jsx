@@ -1,9 +1,8 @@
 import './Navbar.css';
 
 import { NavLink } from 'react-router-dom';
-// import type { JSX } from 'react';
 
-const Navbar = () => { // export default function Navbar() {
+const Navbar = () => {
   return (
     <nav className='menu'>
       <NavLink
