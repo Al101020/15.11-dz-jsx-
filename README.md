@@ -1,3 +1,20 @@
+
+
+https://reactdev.ru/libs/redux-toolkit/#redux
+
+# Блог Максима Габова
+ - Урок 9: Асинхронные операции с `createAsyncThunk` в Redux Toolkit
+https://max-gabov.ru/urok-9-asinxronnye-operacii-s-createasyncthunk-v-redux-toolkit/
+
+https://max-gabov.ru/category/dlya-nachinayushhix/javascript-dlya-nachinayushhix/uroki-po-redux/
+
+https://redux-toolkit.js.org/tutorials/quick-start
+
+
+
+
+
+
 # Redux Toolkit - Поиск фильмов
 ===
 
@@ -347,13 +364,9 @@ interface SearchResponse {
 
 
 
-https://reactdev.ru/libs/redux-toolkit/#redux
 
-# Блог Максима Габова
- - Урок 9: Асинхронные операции с `createAsyncThunk` в Redux Toolkit
-https://max-gabov.ru/urok-9-asinxronnye-operacii-s-createasyncthunk-v-redux-toolkit/
 
-https://max-gabov.ru/category/dlya-nachinayushhix/javascript-dlya-nachinayushhix/uroki-po-redux/
+
 _______________________________________________________________________________________
 # React + Vite
 
