@@ -7,6 +7,8 @@ import Navbar from './components/Navbar';
 
 import Result from './components/Result';
 
+import UserList from './features/users/UserList';
+
 export const App = () => {
 
   return (
@@ -20,6 +22,7 @@ export const App = () => {
         <Route path="/favorites" element={<FavoritesPage />} />
       </Routes>
       <Result />
+      <UserList />
     </div>
   </div>
 )};

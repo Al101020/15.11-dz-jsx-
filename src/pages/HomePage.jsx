@@ -1,23 +1,34 @@
 import { useEffect, useState } from 'react';
-
 import { useSelector, useDispatch } from 'react-redux';
 
 import { selectMovies } from '../features/resultSearchSlice'; // ---
 import { selectAddMovie } from '../features/resultSearchSlice'; // ---
 
-import fetchData from '../api/fetchData';
+import fetchMovies from '../api/fetchMovies';
 
-import { fetchAddMovies } from '../api/fetchData';
-
+import { clearError } from '../features/resultSearchSlice';
 
 const HomePage = () => {
   const [textInput, setTextInput] = useState('');
   const [search, setSearch] = useState('');
-  const [foundMovies, setFoundMovies] = useState([]);
-
+  const [foundMovies, setFoundMovies] = useState([]);  // const movies = useSelector(selectMovies);
   const addMovies = useSelector(selectAddMovie);
 
   const dispatch = useDispatch();
+    // Выбираем нужные части состояния из стора - moviesArr
+    const { movies: movies, isLoading, isError, error } = useSelector((state) => state.moviesObj);
+
+    // Эффект для загрузки пользователей при монтировании компонента
+  useEffect(() => {
+    dispatch(fetchMovies());
+  }, [dispatch]);
+  
+  const handleRetry = () => { // для кнопки обновить
+    dispatch(clearError());
+    dispatch(fetchMovies());
+  };
+  
+
 
   const handleChangeSearch = (e) => {
     e.preventDefault();
@@ -30,11 +41,10 @@ const HomePage = () => {
   const handleSearch = () => {
     setSearch(textInput);
     setTextInput('');    // console.log(search);
-
-    console.log('Перед запуском fetchAddMovies');
-    fetchAddMovies(apiKey, textInput, dispatch, addMovies); // ----- запрос НЕ проходит
-    console.log('Перед запуском fetchData');
-    fetchData(apiKey, textInput, dispatch, addMovies); // --- запрос проходит
+    // console.log('Перед запуском fetchMovies');
+    const ob = {apiKey: apiKey, textInput: textInput, dispatch: dispatch, addMovies: addMovies};
+    // fetchMovies(ob);
+    dispatch(fetchMovies(ob));
   };
 
   useEffect(() => { // - под вопросом.
@@ -42,6 +52,27 @@ const HomePage = () => {
       return;
     }
   }, [search]);
+
+  // Рендерим состояние ошибки
+  if (isError) {
+    return (
+      <div className="error">
+        <p>Ошибка при загрузке: {error}</p>
+        {/* <button onClick={handleRetry}>Попробовать снова</button> */}
+      </div>
+    );
+  };
+
+  // isLoading
+  // if (isLoading) {
+  //   return (
+  //     <div className="isLoading">
+  //       <p>загрузка...</p>
+  //       {/* <button onClick={handleRetry}>Попробовать снова</button> */}
+  //     </div>
+  //   );
+  // };
+  
 
   return (
     <>
