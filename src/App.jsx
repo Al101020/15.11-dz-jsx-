@@ -5,7 +5,7 @@ import HomePage from './pages/HomePage';
 import FavoritesPage from './pages/FavoritesPage';
 import Navbar from './components/Navbar';
 
-import Result from './components/Result';
+// import Result from './components/Result';
 
 // import UserList from './features/users/UserList';
 
@@ -21,7 +21,7 @@ export const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/favorites" element={<FavoritesPage />} />
       </Routes>
-      <Result />
+      {/* <Result /> */}
       {/* <UserList /> */}
     </div>
   </div>

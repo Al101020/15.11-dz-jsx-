@@ -39,14 +39,23 @@ export const moviesSlice = createSlice({
       })
       // Обработка успешной загрузки (fulfilled)
       .addCase(fetchMovies.fulfilled, (state, action) => {
+        console.log('Загрузка УСПЕШНА');
         state.isLoading = false;
         state.isError = false;
         // Записываем массив пользователей, пришедший с сервера, в state.items
         // state.items = action.payload;
-        if (!action.payload || !action.payload.Title) {
+
+        // if (!action.payload || !action.payload.Title) {
+        //   return;
+        // };
+
+        // state.movies.push(action.payload);// --- добавлял фильм
+        if (action.payload === undefined) {
           return;
-        };
-        state.movies.push(action.payload);
+        }
+        console.log(action.payload.Search);//
+        state.movies = action.payload.Search;
+        console.log(state.movies);
 
         // if (action.payload.Title) {
         //   state.movies.push(action.payload);

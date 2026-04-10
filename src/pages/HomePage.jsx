@@ -8,6 +8,8 @@ import fetchMovies from '../api/fetchMovies';
 
 import { clearError } from '../features/resultSearchSlice';
 
+import Result from '../components/Result';
+
 const HomePage = () => {
   const [textInput, setTextInput] = useState('');
   const [search, setSearch] = useState('');
@@ -27,8 +29,6 @@ const HomePage = () => {
     dispatch(clearError());
     dispatch(fetchMovies());
   };
-  
-
 
   const handleChangeSearch = (e) => {
     e.preventDefault();
@@ -40,8 +40,7 @@ const HomePage = () => {
 
   const handleSearch = () => {
     setSearch(textInput);
-    setTextInput('');    // console.log(search);
-    // console.log('Перед запуском fetchMovies');
+    setTextInput('');    // console.log(search);    // console.log('Перед запуском fetchMovies');
     const ob = {apiKey: apiKey, textInput: textInput, dispatch: dispatch, addMovies: addMovies};
     // fetchMovies(ob);
     dispatch(fetchMovies(ob));
@@ -63,17 +62,6 @@ const HomePage = () => {
     );
   };
 
-  // isLoading
-  // if (isLoading) {
-  //   return (
-  //     <div className="isLoading">
-  //       <p>загрузка...</p>
-  //       {/* <button onClick={handleRetry}>Попробовать снова</button> */}
-  //     </div>
-  //   );
-  // };
-  
-
   return (
     <>
       <h1>Главная страница с поиском</h1>
@@ -89,6 +77,7 @@ const HomePage = () => {
         />
         <button onClick={handleSearch}>Искать фильм</button>
       </div>
+      <Result />
     </>
   );
 };
