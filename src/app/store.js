@@ -5,8 +5,7 @@ import usersSlice from '../features/users/usersSlice';
 
 const store = configureStore({
   reducer: {
-    moviesObj: moviesReducer,
-    users: usersSlice,
+    moviesObj: moviesReducer,    // users: usersSlice,
   },
 });
 
