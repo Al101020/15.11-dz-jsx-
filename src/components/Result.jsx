@@ -30,7 +30,7 @@ const Result = () => {
         <h2>Список фильмов</h2>
       <ul>
         {movies.map((movie) => (
-          <li key={uuidv4}>
+          <li key={uuidv4()}>
             <strong>{movie.Title}</strong> ({movie.Year}, {movie.Writer}, {movie.Runtime})
           </li>
         ))}
