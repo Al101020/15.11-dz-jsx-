@@ -1,29 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { movies } from '../features/resultSearchSlice';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { selectMovies } from '../features/resultSearchSlice';
-
-
-const apiKey = 'YOUR_API_KEY'; // замените на свой ключ
-const searchTerm = 'Inception'; // поисковый запрос
-
-// fetch(`http://www.omdbapi.com/?apikey=${apiKey}&s=${searchTerm}`)
-//   .then(response => response.json())
-//   .then(data => {
-//     if (data.Response === 'True') {
-//       data.Search.forEach(movie => {
-//         console.log(`${movie.Title} (${movie.Year})`);
-//       });
-//     } else {
-//       console.log('No results found.');
-//     }
-//   })
-//   .catch(error => console.error('Error:', error));
-
-
-
-// Создаем асинхронный thunk
 const fetchMovies = createAsyncThunk(
   'moviesSearch/fetchMovies',
   async (ob, thunkAPI) => {
@@ -31,20 +7,16 @@ const fetchMovies = createAsyncThunk(
     try {
       if (ob === undefined) {
         return;
-      }      //   console.log('Перед запуском: fetchMovies');
-    //   console.log(ob);
+      }
       const response = 
       await fetch(`https://www.omdbapi.com?apikey=${ob.apiKey}&s=${ob.textInput}`);
-            // Поиск: https://www.omdbapi.com?apikey=YOUR_KEY&s=SEARCH_TERM
       if (!response.ok) {
-        console.log(',jkvkv');
         throw new Error('Failed to fetch Movies');
       } else {
         const data = await response.json();
-        console.log(data);//
-        return data; // Это станет action.payload в fulfilled
+        return data;
       }
-    } catch (error) {      // Можно использовать thunkAPI.rejectWithValue для передачи структурированных данных об ошибке
+    } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -53,6 +25,14 @@ const fetchMovies = createAsyncThunk(
 export default fetchMovies;
 
 
+
+
+
+// Создаем асинхронный thunk
+            // Поиск: https://www.omdbapi.com?apikey=YOUR_KEY&s=SEARCH_TERM
+        // console.log(data);//
+ // Это станет action.payload в fulfilled
+      // Можно использовать thunkAPI.rejectWithValue для передачи структурированных данных об ошибке
 // // Создаем асинхронный thunk
 // const fetchMovies = createAsyncThunk(
 //   'moviesSearch/fetchMovies',

@@ -17,8 +17,11 @@ const HomePage = () => {
   const addMovies = useSelector(selectAddMovie);
 
   const dispatch = useDispatch();
+
     // Выбираем нужные части состояния из стора - moviesArr
-    const { movies: movies, isLoading, isError, error } = useSelector((state) => state.moviesObj);
+  const { movies: movies, favorites: favorites, isLoading, isError,
+    error } = useSelector((state) => state.moviesObj);
+  // console.log(favorites);
 
     // Эффект для загрузки пользователей при монтировании компонента
   useEffect(() => {
