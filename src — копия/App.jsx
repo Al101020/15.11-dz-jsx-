@@ -3,8 +3,11 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import HomePage from './pages/HomePage';
 import FavoritesPage from './pages/FavoritesPage';
-import DetalistPage from './pages/DetalistPage';
 import Navbar from './components/Navbar';
+
+// import Result from './components/Result';
+
+// import UserList from './features/users/UserList';
 
 export const App = () => {
 
@@ -17,8 +20,9 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/favorites" element={<FavoritesPage />} />
-        <Route path="/movie/:id" element={<DetalistPage />} />
       </Routes>
+      {/* <Result /> */}
+      {/* <UserList /> */}
     </div>
   </div>
 )};

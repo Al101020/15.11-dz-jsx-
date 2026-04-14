@@ -15,15 +15,25 @@ export const moviesSlice = createSlice({
   initialState,
   reducers: {
     clearError: (state, action) => {
+       console.log(' bkuvcutcv ');
       state.isError = false;
       state.error = '';
-    },    
+    },
+    
     addMovie: (state, action) => {
+      console.log(' bkuvcutcv ');
       state.movies = [...state.movies, action.payload];
     },
     movies: (state, action) => {
+      console.log(' bkuvcutcv ');
       state.movies = action.payload
     },
+
+    // - reducer: ложим в Избранного
+    // favorites: (state) => {
+    //   console.log(' favorites ');
+    //   state.movies = [...state.favorites, action.payload];
+    // },
     addFavorite(state, action) {
       // Здесь можно добавить логику для проверки наличия элемента в массиве и его добавления
       state.favorites.push(action.payload);
@@ -47,8 +57,8 @@ export const moviesSlice = createSlice({
         state.isError = false;
         if (action.payload === undefined) {
           return;
-        }
-        state.movies = action.payload.Search;
+        }        // console.log(action.payload.Search);//
+        state.movies = action.payload.Search;        // console.log(state.movies);
       })
       // Обработка ошибки (rejected)
       .addCase(fetchMovies.rejected, (state, action) => {

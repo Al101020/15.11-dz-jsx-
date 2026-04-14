@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { App } from './App';
 import appStore from './app/store';
+import './index.css';
 
 const container = document.getElementById('root');
 

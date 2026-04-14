@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-// import { selectMovies } from '../features/resultSearchSlice'; // ---
+import { selectMovies } from '../features/resultSearchSlice'; // ---
 import { selectAddMovie } from '../features/resultSearchSlice'; // ---
 
 import fetchMovies from '../api/fetchMovies';
@@ -15,7 +15,7 @@ const varObj = {};
 const HomePage = () => {
   const [textInput, setTextInput] = useState('');
   const [search, setSearch] = useState('');
-  // const [foundMovies, setFoundMovies] = useState([]);
+  const [foundMovies, setFoundMovies] = useState([]);  // const movies = useSelector(selectMovies);
   const addMovies = useSelector(selectAddMovie);
 
   const dispatch = useDispatch();
@@ -46,7 +46,9 @@ const HomePage = () => {
 
         setSearch(input.value);
         setTextInput('');
- 
+
+        
+        
         const ob = {
           apiKey: apiKey,
           textInput: varObj.valueInput,
@@ -83,6 +85,7 @@ const HomePage = () => {
     return (
       <div className="error">
         <p>Ошибка при загрузке: {error}</p>
+        {/* <button onClick={handleRetry}>Попробовать снова</button> */}
       </div>
     );
   };

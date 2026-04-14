@@ -1,3 +1,4 @@
+// import './Result.css';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { selectMovies } from '../features/resultSearchSlice';
@@ -31,3 +32,27 @@ const Result = () => {
 }
 
 export default Result;
+
+
+
+
+
+
+
+
+
+          // <li key={movie.imdbID}>
+          //   <strong>{movie.Title}</strong> ({movie.Year})
+          //   <button onClick={(e) => handleToFavorites(e)}>в избранное</button>
+          //   <strong className='displayNone'>{movie.imdbID}</strong>
+          // </li>
+// console.log(movies);
+  // const moviesArr = movies;  // console.log(moviesArr.lenght);
+   // console.log(moviesObj);
+    // console.log(moviesObj.movies);
+
+  // return (
+  //   <>
+  //     <div className='result'>Результат</div>
+  //   </>
+  // )
