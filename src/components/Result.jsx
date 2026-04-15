@@ -11,6 +11,8 @@ const Result = () => {
   const movies = useSelector(selectMovies);
   const moviesObj = useSelector(selectMoviesObj);
 
+  console.log(movies);
+
   if (moviesObj.isLoading) {
     return <Loader />;
   } else if (movies === undefined) {

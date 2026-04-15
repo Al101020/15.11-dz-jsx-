@@ -1,39 +1,45 @@
-import { createSlice } from '@reduxjs/toolkit';// import { fetchAddMovies } from '../api/fetchData'
-// import fetchMovies from '../api/fetchMovies';
+import { createSlice, current } from '@reduxjs/toolkit';
 import fetchDetailsMovie from '../api/fetchDetailsMovie';
 
-
 const initialState = { // Details
-  details: '',
+  details: [],
   isLoadingDetails: false,
   isErrorDetails: false,
   errorDetails: '',
 };
 
 export const detailsSlice = createSlice({
-  name: 'moviesSearch',
+  name: 'details',
   initialState,
   reducers: {
     clearError: (state, action) => {
-      state.isError = false;
-      state.error = '';
+      state.isErrorDetails = false;
+      state.errorDetails = '';
+      console.log(current(state));//
     },
-    details: (state, action) => {
-      state.details = action.payload
+    upgradeDetails: (state, action) => {
+      state.details = [action.payload];
+      console.log(current(state));//
     },
+    // details: (state, action) => {
+    //   state.details = [action.payload];
+    //   console.log(current(state));//
+    // },
   },
   extraReducers: (builder) => {
     builder
       // Обработка начала загрузки (pending)
       .addCase(fetchDetailsMovie.pending, (state) => {
-        state.isLoading = true;
-        state.isError = false; // Сбрасываем флаг ошибки при новом запросе
-        state.error = '';
+        // console.log('pending');
+        state.isLoadingDetails = true;
+        state.isErrorDetails = false; // Сбрасываем флаг ошибки при новом запросе
+        state.errorDetails = '';
       })
       // Обработка успешной загрузки (fulfilled)
-      .addCase(fetchDetailsMovie.fulfilled, (state, action) => {// console.log('Загрузка УСПЕШНА');
-        state.isLoading = false;
-        state.isError = false;
+      .addCase(fetchDetailsMovie.fulfilled, (state, action) => {// 
+        // console.log('Загрузка УСПЕШНА');        // console.log(state);
+        state.isLoadingDetails = false;
+        state.isErrorDetails = false;
         if (action.payload === undefined) {
           return;
         }
@@ -41,20 +47,24 @@ export const detailsSlice = createSlice({
       })
       // Обработка ошибки (rejected)
       .addCase(fetchDetailsMovie.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = true;
-        state.error = action.payload || 'Something went wrong';
+        state.isLoadingDetails = false;
+        state.isErrorDetails = true;
+        state.errorDetails = action.payload || 'Something went wrong';
       });
   },
 });
 
-// export const selectMoviesObj = (state) => state.moviesObj;//
-// export const selectMovies = (state) => state.moviesObj.movies;//
-// export const selectAddMovie = (state) => state.moviesObj.addMovie;//
-
-// export const { movies, addMovie, clearError } = moviesSlice.actions;
-// export const { addFavorite, removeFavorite } = moviesSlice.actions;
+export const selectDetailsObj = (state) => state.detailsObj;//
+export const selectDetails = (state) => state.moviesObj.details;//
+export const selectUpgradeDetails = (state) => state.detailsObj.upgradeDetails;
 
 export const { clearError, details } = detailsSlice.actions;
 
 export default detailsSlice.reducer;
+
+
+
+
+// export const selectAddMovie = (state) => state.moviesObj.addMovie;//
+// export const { movies, addMovie, clearError } = moviesSlice.actions;
+// export const { addFavorite, removeFavorite } = moviesSlice.actions;

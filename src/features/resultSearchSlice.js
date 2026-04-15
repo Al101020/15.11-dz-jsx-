@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';// import { fetchAddMovies } from '../api/fetchData'
+import { createSlice, current } from '@reduxjs/toolkit';// import { fetchAddMovies } from '../api/fetchData'
 import fetchMovies from '../api/fetchMovies';
 
 
@@ -17,20 +17,25 @@ export const moviesSlice = createSlice({
     clearError: (state, action) => {
       state.isError = false;
       state.error = '';
+      console.log(current(state));//
     },    
     addMovie: (state, action) => {
       state.movies = [...state.movies, action.payload];
+      console.log(current(state));//
     },
     movies: (state, action) => {
-      state.movies = action.payload
+      state.movies = action.payload;
+      console.log(current(state));//
     },
     addFavorite(state, action) {
       // Здесь можно добавить логику для проверки наличия элемента в массиве и его добавления
       state.favorites.push(action.payload);
+      console.log(current(state));//
     },
     removeFavorite(state, action) {
       // Здесь можно добавить логику для удаления элемента из массива
       state.favorites = state.favorites.filter(item => item !== action.payload);
+      console.log(current(state));//
     },
   },
   extraReducers: (builder) => {

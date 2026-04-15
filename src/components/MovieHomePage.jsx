@@ -16,8 +16,7 @@ function MovieHomePage(props) {
       <li className='liMovie'>
         <div className='divImgMovie' onClick={(e) => handleDetailsMovie(e, dispatch,
            fetchDetailsMovie)}>
-          {/* <img className='imgMovie' src={props.props.Poster} alt={props.props.Poster} /> */}
-          <img className='imgMovie' src={props.props.Poster} alt='Картинки нет' />
+          <img className='imgMovie' src={props.props.Poster} alt='Плаката нет' />
         </div>
         <div className='divTitleMovie'>
           <strong>{props.props.Title}</strong> ({props.props.Year})<br />
