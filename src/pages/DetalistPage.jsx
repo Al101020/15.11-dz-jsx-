@@ -2,38 +2,37 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectDetailsObj } from '../features/detailsSlice';
 import { selectDetails } from '../features/detailsSlice';
-// import fetchDetailsMovie from '../api/fetchDetailsMovie';
+import { upgradeDetails } from '../features/detailsSlice';
 
 import LoaderDetails from './LoaderDetails';
 
-
-// function 
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-const apiKey = '64405bd2';
+// const apiKey = '64405bd2';
 
-const fetchDetailsMovie = createAsyncThunk(
-  'details/fetchDetailsMovie',// ob
-  async (id, thunkAPI ) => {
-    try {
-      if (id === '' || id === undefined) {
-        return;
-      };
-      console.log(id);
+// const fetchDetailsMovie = createAsyncThunk(
+//   'details/fetchDetailsMovie',// ob // dispatch(fetchMovies(ob)); - пример
+//   async (ob, thunkAPI ) => {
+//     try {
+//       if (ob.id === '' || ob.id === undefined) {
+//         return;
+//       };
+//       console.log(ob);
 
-      const response = await fetch(`https://www.omdbapi.com?apikey=${apiKey}&i=${id}`);
-      if (!response.ok) {
-        throw new Error('Failed to fetch Movies');
-      } else {
-        const data = await response.json();
-        console.log(data);//
-        return data;
-      }
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+//       const response = await fetch(`https://www.omdbapi.com?apikey=${ob.apiKey}&i=${ob.id}`);
+//       if (!response.ok) {
+//         throw new Error('Failed to fetch Movies');
+//       } else {
+//         const data = await response.json();
+//         console.log(data);//
+//         dispatch(upgradeDetails(data));
+//         return data;
+//       }
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
 
 
 const DetalistPage = () => {
@@ -41,15 +40,22 @@ const DetalistPage = () => {
   const url = window.location.href;
   const imdbID = url.split('/:')[1];
 
-
   const detailsObj = useSelector(selectDetailsObj);
   console.log(detailsObj);
   
   const details = useSelector(selectDetails);
   console.log(details);
 
+  // const ob = {
+  //   apiKey: apiKey,
+  //   id: imdbID,
+  //   dispatch: dispatch,
+  //   upgradeDetails: upgradeDetails,
+  //   details: details,
+  // }
 
-  fetchDetailsMovie(imdbID);
+  // // dispatch(fetchDetailsMovie(ob));
+  // fetchDetailsMovie(ob);
 
       // Эффект для загрузки пользователей при монтировании компонента
   // useEffect(() => {    // console.log('useEffect'); // --- ????????
@@ -63,7 +69,8 @@ const DetalistPage = () => {
   if (detailsObj.isErrorDetails) {
     return (
       <div className="error">
-        <p>Ошибка при загрузке: {error}</p>
+        <p>Ошибка при загрузке: {detailsObj.errorDetails}</p>
+        {/* <p>Ошибка при загрузке: </p> */}
       </div>
     );
   };

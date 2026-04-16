@@ -1,20 +1,26 @@
-// import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import fetchDetailsMovie from "../api/fetchDetailsMovie";
 
-const handleDetailsMovie = (e, dispatch, fetchDetailsMovie, details) => {
+const handleDetailsMovie = (e, navigate) => {
   e.preventDefault();
-  
-
+  console.log('--- handleDetailsMovie ---');
   const li = e.target.closest('.liMovie');
-  const id = li.children[2].textContent;
-  console.log(li);
-  console.log(id);
-
-  dispatch(fetchDetailsMovie(id));
-  // dispatch(details(fetchDetailsMovie(id)));
-
-  // const navigate = useNavigate();
-  // navigate('/contacts');
+  const imdbID = li.children[2].textContent;
+  navigate(`/movie/:${imdbID}`);
 };
 
 export default handleDetailsMovie;
+
+// ---
+// import fetchDetailsMovie from "../api/fetchDetailsMovie";
+
+// const handleDetailsMovie = (e, dispatch) => {
+//   e.preventDefault();
+//   console.log('--- handleDetailsMovie ---');
+//   const li = e.target.closest('.liMovie');
+//     const imdbID = li.children[2].textContent;
+//   dispatch(fetchDetailsMovie(imdbID));
+//   navigate(`/movie/:${imdbID}`);
+// };
+
+// export default handleDetailsMovie;

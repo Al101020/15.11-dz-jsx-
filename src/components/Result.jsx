@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { selectMovies } from '../features/resultSearchSlice';
 import { selectMoviesObj } from '../features/resultSearchSlice';
@@ -11,7 +11,7 @@ const Result = () => {
   const movies = useSelector(selectMovies);
   const moviesObj = useSelector(selectMoviesObj);
 
-  console.log(movies);
+  // console.log(movies);
 
   if (moviesObj.isLoading) {
     return <Loader />;

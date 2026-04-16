@@ -6,11 +6,13 @@ import { selectAddMovie } from '../features/resultSearchSlice'; // ---
 
 import fetchMovies from '../api/fetchMovies';
 
-import { clearError } from '../features/resultSearchSlice';
+// import { clearError } from '../features/resultSearchSlice';
 
 import Result from '../components/Result';
 
 const varObj = {};
+
+const apiKey = '64405bd2'; // API-ключ
 
 const HomePage = () => {
   const [textInput, setTextInput] = useState('');
@@ -61,13 +63,11 @@ const HomePage = () => {
     });
   };
 
-  const apiKey = '64405bd2'; // API-ключ
-
   const handleSearch = () => {    // console.log(textInput);
     
     setSearch(textInput);
-    setTextInput('');    // console.log(search);    // console.log('Перед запуском fetchMovies');
     const ob = {apiKey: apiKey, textInput: textInput, dispatch: dispatch, addMovies: addMovies};
+    setTextInput('');    // console.log(search);    // console.log('Перед запуском fetchMovies');
     // console.log(ob);     // fetchMovies(ob);
     dispatch(fetchMovies(ob));
   };

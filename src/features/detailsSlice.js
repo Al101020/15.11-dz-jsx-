@@ -2,7 +2,7 @@ import { createSlice, current } from '@reduxjs/toolkit';
 import fetchDetailsMovie from '../api/fetchDetailsMovie';
 
 const initialState = { // Details
-  details: [],
+  detailsArr: [],
   isLoadingDetails: false,
   isErrorDetails: false,
   errorDetails: '',
@@ -55,10 +55,11 @@ export const detailsSlice = createSlice({
 });
 
 export const selectDetailsObj = (state) => state.detailsObj;//
-export const selectDetails = (state) => state.moviesObj.details;//
+export const selectDetails = (state) => state.detailsObj.detailsArr;//
 export const selectUpgradeDetails = (state) => state.detailsObj.upgradeDetails;
 
-export const { clearError, details } = detailsSlice.actions;
+export const { clearError, upgradeDetails } = detailsSlice.actions;
+
 
 export default detailsSlice.reducer;
 

@@ -1,39 +1,24 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
-// import handleDetailsMovie from './handleDetailsMovie';
-// import fetchMovies from '../api/fetchMovies';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import handleDetailsMovie from './handleDetailsMovie';// import fetchMovies from '../api/fetchMovies';
 import fetchDetailsMovie from '../api/fetchDetailsMovie';
 
-import { details } from '../features/detailsSlice';//
+import { upgradeDetails } from '../features/detailsSlice';//// console.log(upgradeDetails);
 
 import { useNavigate } from 'react-router-dom';
 
 function MovieFavorite(favorite) {//
-  const dispatch = useDispatch();//
+  const dispatch = useDispatch();//  // const navigate = useNavigate();
   const navigate = useNavigate();
 
-
-
-  const handleDetailsMovie = (e) => {
-    const li = e.target.closest('.liMovie');
-    const imdbID = li.children[2].textContent;
-
-    // console.log(li);
-    // console.log(imdbID);
-    // console.log(window.location.href);
-    navigate(`/movie/:${imdbID}`);
-  };
-
-
-
       // Эффект для загрузки пользователей при монтировании компонента
-  useEffect(() => {
-    dispatch(fetchDetailsMovie());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchDetailsMovie());
+  // }, [dispatch]);
   return (
     <>
       <li className='liMovie'>
-        <div className='divImgMovie' onClick={(e) => handleDetailsMovie(e)}>
+        <div className='divImgMovie' onClick={(e) => handleDetailsMovie(e, navigate)}>
           <img className='imgMovie' src={favorite.props.Poster} alt={favorite.props.Poster} />
         </div>
         <div className='divTitleMovie'>

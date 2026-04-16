@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 // import { addFavorite, removeFavorite } from '../features/resultSearchSlice';
 import MovieFavorite from '../components/MovieFavorite';
 
