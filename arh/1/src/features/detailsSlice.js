@@ -3,7 +3,6 @@ import fetchDetailsMovie from '../api/fetchDetailsMovie';
 
 const initialState = { // Details
   detailsImdbID: '',
-  detailsMovie: '',
   isLoadingDetails: false,
   isErrorDetails: false,
   errorDetails: '',
@@ -18,14 +17,14 @@ export const detailsSlice = createSlice({
       state.errorDetails = '';
       console.log(current(state));//
     },
-    upgradeDetailsImdbID: (state, action) => {
+    upgradeDetails: (state, action) => {
       state.detailsImdbID = action.payload;
-      // console.log(current(state));//
+      console.log(current(state));//
     },
-    upgradeDetailsMovie: (state, action) => {
-      state.detailsMovie = action.payload;
-      // console.log(current(state));//
-    },
+    // details: (state, action) => {
+    //   state.details = [action.payload];
+    //   console.log(current(state));//
+    // },
   },
   extraReducers: (builder) => {
     builder
@@ -57,10 +56,9 @@ export const detailsSlice = createSlice({
 
 export const selectDetailsObj = (state) => state.detailsObj;//
 export const selectDetails = (state) => state.detailsObj.detailsImdbID;//
-export const selectUpgradeDetailsImdbID = (state) => state.detailsObj.upgradeDetailsImdbID;
-export const selectDetailsMovie = (state) => state.detailsObj.detailsMovie;//detailsMovie
+export const selectUpgradeDetails = (state) => state.detailsObj.upgradeDetails;
 
-export const { clearError, upgradeDetailsImdbID, upgradeDetailsMovie } = detailsSlice.actions;
+export const { clearError, upgradeDetails } = detailsSlice.actions;
 
 
 export default detailsSlice.reducer;

@@ -30,7 +30,7 @@ export const moviesSlice = createSlice({
     addFavorite(state, action) {
       // Здесь можно добавить логику для проверки наличия элемента в массиве и его добавления
       state.favorites.push(action.payload);
-      // console.log(current(state));//
+      console.log(current(state));//
     },
     removeFavorite(state, action) {
       // Здесь можно добавить логику для удаления элемента из массива
