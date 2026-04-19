@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import handleDetailsMovie from './handleDetailsMovie';// import fetchMovies from '../api/fetchMovies';
 import fetchDetailsMovie from '../api/fetchDetailsMovie';
 
-// import { upgradeDetailsImdbID } from '../features/detailsSlice';//// console.log(upgradeDetails);//selectUpgradeDetailsImdbID
+import { upgradeDetails } from '../features/detailsSlice';//// console.log(upgradeDetails);
 
 import { useNavigate } from 'react-router-dom';
 
