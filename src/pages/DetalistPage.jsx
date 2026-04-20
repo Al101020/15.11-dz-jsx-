@@ -12,17 +12,20 @@ import fetchDetailsMovie from '../api/fetchDetailsMovie';
 import LoaderDetails from './LoaderDetails';
 
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { selectFavorites } from '../features/resultSearchSlice';
 
 const DetalistPage = () => {
+  const favorites = useSelector(selectFavorites);  // console.log(favorites);
+
   const dispatch = useDispatch();
   const url = window.location.href;
   const imdbID = url.split('/:')[1];
 
   const detailsObj = useSelector(selectDetailsObj);
-  console.log(detailsObj);
+  // console.log(detailsObj.details.Title);
   
   const details = useSelector(selectDetails);
-  // console.log(details);
+  // console.log(details.Title);
 
 
   const ob = {
@@ -59,11 +62,59 @@ const DetalistPage = () => {
     );
   };
 
-  return (
-    <>
-      <h1>Страница деталей фильма</h1>
-    </>
-  );
+  // if (favorites.some(favorite => favorite.imdbID === objMovie.imdbID)) {};
+  if (detailsObj.details.Title) {
+    console.log(favorites);
+    if (favorites.some(favorite => favorite.imdbID === imdbID)) {
+      return (
+        <>
+          <h1>Страница деталей фильма</h1>
+          <p>Title: <strong>{detailsObj.details.Title}</strong>({detailsObj.details.Year})</p>
+          <p>Released: <strong>{detailsObj.details.Released}</strong></p>
+          <p>Runtime: <strong>{detailsObj.details.Runtime}</strong></p>
+          <p>Type: <strong>{detailsObj.details.Type}</strong></p>
+          <p>Actors: <strong>{detailsObj.details.Actors}</strong></p>
+          <p>BoxOffice: <strong>{detailsObj.details.BoxOffice}</strong></p>
+          <p>Country: <strong>{detailsObj.details.Country}</strong></p>
+          <p>Director: <strong>{detailsObj.details.Director}</strong></p>
+          <p>Genre: <strong>{detailsObj.details.Genre}</strong></p>
+          <p>Language: <strong>{detailsObj.details.Language}</strong></p>
+          <p>Plot: <strong>{detailsObj.details.Plot}</strong></p>
+          <p>Writer: <strong>{detailsObj.details.Writer}</strong></p>
+          <button>Удалить из избранного</button>{/*  onClick={() => addToFavorites()} */}
+          {/* <p><a href={detailsObj.details.Poster}>{detailsObj.details.Poster}</a></p> */}
+          <p><img src={detailsObj.details.Poster} alt='Плаката нет' /></p>
+        </>
+      );
+    } else {
+      return (
+      <>
+        <h1>Страница деталей фильма</h1>
+          <p>Title: <strong>{detailsObj.details.Title}</strong>({detailsObj.details.Year})</p>
+          <p>Released: <strong>{detailsObj.details.Released}</strong></p>
+          <p>Runtime: <strong>{detailsObj.details.Runtime}</strong></p>
+          <p>Type: <strong>{detailsObj.details.Type}</strong></p>
+          <p>Actors: <strong>{detailsObj.details.Actors}</strong></p>
+          <p>BoxOffice: <strong>{detailsObj.details.BoxOffice}</strong></p>
+          <p>Country: <strong>{detailsObj.details.Country}</strong></p>
+          <p>Director: <strong>{detailsObj.details.Director}</strong></p>
+          <p>Genre: <strong>{detailsObj.details.Genre}</strong></p>
+          <p>Language: <strong>{detailsObj.details.Language}</strong></p>
+          <p>Plot: <strong>{detailsObj.details.Plot}</strong></p>
+          <p>Writer: <strong>{detailsObj.details.Writer}</strong></p>
+          <button>Добавить в избранные</button>{/*  onClick={() => addToFavorites()} */}
+          {/* <p><a href={detailsObj.details.Poster}>{detailsObj.details.Poster}</a></p>          // Poster // <a href="URL">Текст ссылки</a> */}
+          <p><img src={detailsObj.details.Poster} alt='Плаката нет' /></p>
+        </>
+      );
+    };
+  }
+
+  // return (
+  //   <>
+  //     <h1>Страница деталей фильма</h1>
+  //   </>
+  // );
 };
 
 export default DetalistPage;

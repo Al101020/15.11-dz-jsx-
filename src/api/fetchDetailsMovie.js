@@ -10,7 +10,7 @@ const fetchDetailsMovie = createAsyncThunk(
       if (ob.id === '' || ob.id === undefined) {
         return;
       };
-      console.log(ob);
+      // console.log(ob);
       // const dispach =  ob.dispach;
       // const upgradeDetails = ob.upgradeDetails;
 
@@ -21,7 +21,7 @@ const fetchDetailsMovie = createAsyncThunk(
         throw new Error('Failed to fetch Movies');
       } else {
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         // console.log(upgradeDetails);
         // console.log(selectUpgradeDetails);
         // dispach(upgradeDetails(data));// или

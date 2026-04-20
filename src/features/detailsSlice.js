@@ -2,7 +2,7 @@ import { createSlice, current } from '@reduxjs/toolkit';
 import fetchDetailsMovie from '../api/fetchDetailsMovie';
 
 const initialState = {
-  detailsArr: [],
+  details: {},
   isLoadingDetails: false,
   isErrorDetails: false,
   errorDetails: '',
@@ -18,9 +18,9 @@ export const detailsSlice = createSlice({
       console.log(current(state));//
     },
     upgradeDetails: (state, action) => {
-      console.log(action);
-      state.detailsArr = [action.payload];
-      console.log(current(state));//
+      // console.log(action);
+      state.details = [action.payload];
+      // console.log(current(state));//
     },
   },
   extraReducers: (builder) => {
@@ -33,16 +33,16 @@ export const detailsSlice = createSlice({
       })
       // Обработка успешной загрузки (fulfilled)
       .addCase(fetchDetailsMovie.fulfilled, (state, action) => {
-        console.log('Загрузка УСПЕШНА');
-        console.log(state);
-        console.log(action);
+        // console.log('Загрузка УСПЕШНА');
+        // console.log(state);
+        // console.log(action);
         state.isLoadingDetails = false;
         state.isErrorDetails = false;
         if (action.payload === undefined) {
           return;
         }
         // state.movies = action.payload.Search;
-        state.detailsArr = action.payload;
+        state.details = action.payload;
       })
       // Обработка ошибки (rejected)
       .addCase(fetchDetailsMovie.rejected, (state, action) => {
@@ -54,7 +54,7 @@ export const detailsSlice = createSlice({
 });
 
 export const selectDetailsObj = (state) => state.detailsObj;//
-export const selectDetails = (state) => state.detailsObj.detailsArr;//
+export const selectDetails = (state) => state.detailsObj.details;//
 export const selectUpgradeDetails = (state) => state.detailsObj.upgradeDetails;
 
 export const { clearError, upgradeDetails } = detailsSlice.actions;

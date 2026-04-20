@@ -48,7 +48,7 @@ function MovieHomePage(props) {  // const favorites = Array.from(props.favorites
         </div>
         <div className='divTitleMovie'>
           <strong>{props.movie.Title}</strong> ({props.movie.Year})<br />
-          <button onClick={() => addToFavorites()}>в избранное</button>
+          <button onClick={() => addToFavorites()}>Добавить в избранные</button>
         </div>
         <strong className='displayNone'>{props.movie.imdbID}</strong>
       </li>
