@@ -11,10 +11,8 @@ const fetchDetailsMovie = createAsyncThunk(
         return;
       };
       console.log(ob);
-      // const dispach =  ob.dispach;
-      // const upgradeDetails = ob.upgradeDetails;
-
-      // const selectUpgradeDetails = ob.selectUpgradeDetails; // или
+      const dispach =  ob.dispach;
+      const upgradeDetails = ob.upgradeDetails;
 
       const response = await fetch(`https://www.omdbapi.com?apikey=${ob.apiKey}&i=${ob.id}`);
       if (!response.ok) {
@@ -22,10 +20,7 @@ const fetchDetailsMovie = createAsyncThunk(
       } else {
         const data = await response.json();
         console.log(data);
-        // console.log(upgradeDetails);
-        // console.log(selectUpgradeDetails);
-        // dispach(upgradeDetails(data));// или
-        // dispach(selectUpgradeDetails(data));
+        dispach(upgradeDetails(data));
         return data;
       }
     } catch (error) {

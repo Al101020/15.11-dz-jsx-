@@ -1,14 +1,14 @@
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import handleDetailsMovie from './handleDetailsMovie';
+import handleDetailsMovie from './handleDetailsMovie';// import fetchMovies from '../api/fetchMovies';
 import fetchDetailsMovie from '../api/fetchDetailsMovie';
 
-import { upgradeDetails } from '../features/detailsSlice';
+import { upgradeDetails } from '../features/detailsSlice';//// console.log(upgradeDetails);
 
 import { useNavigate } from 'react-router-dom';
 
-function MovieFavorite(favorite) {
-  const dispatch = useDispatch();
+function MovieFavorite(favorite) {//
+  const dispatch = useDispatch();//  // const navigate = useNavigate();
   const navigate = useNavigate();
 
       // Эффект для загрузки пользователей при монтировании компонента

@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectAddMovie } from '../features/resultSearchSlice';
+
+// import { selectMovies } from '../features/resultSearchSlice'; // ---
+import { selectAddMovie } from '../features/resultSearchSlice'; // ---
+
 import fetchMovies from '../api/fetchMovies';
-import MovieSearchResult from '../components/MovieSearchResult';
 
-import { selectMoviesObj } from '../features/resultSearchSlice';
+// import { clearError } from '../features/resultSearchSlice';
 
-// import store from '../app/store';
-// console.log(store.getState());// начальное состояние пустое
+import Result from '../components/Result';
 
 const varObj = {};
 
@@ -16,15 +17,21 @@ const apiKey = '64405bd2'; // API-ключ
 const HomePage = () => {
   const [textInput, setTextInput] = useState('');
   const [search, setSearch] = useState('');
+  // const [foundMovies, setFoundMovies] = useState([]);
   const addMovies = useSelector(selectAddMovie);
 
   const dispatch = useDispatch();
 
     // Выбираем нужные части состояния из стора - moviesArr
   const { movies: movies, favorites: favorites, isLoading, isError,
-    error } = useSelector((state) => state.moviesObj);
+    error } = useSelector((state) => state.moviesObj);   // console.log(favorites);
 
-     const handleChangeSearch = (e) => {     // e.preventDefault();
+    // Эффект для загрузки пользователей при монтировании компонента
+  useEffect(() => {
+    dispatch(fetchMovies());
+  }, [dispatch]);
+  
+  const handleChangeSearch = (e) => {     // e.preventDefault();
     
     const valueInput = e.target.value;
     setTextInput(valueInput);    // console.log(textInput);
@@ -45,32 +52,25 @@ const HomePage = () => {
         const ob = {
           apiKey: apiKey,
           textInput: varObj.valueInput,
-          // dispatch: dispatch,
-          // addMovies: addMovies
+          dispatch: dispatch,
+          addMovies: addMovies
         };        // console.log(ob);
 
         if (ob.textInput) {
           dispatch(fetchMovies(ob));
-          // console.log(store.getState());// нет ни чего
         };
       };
     });
   };
 
-  const searchForMovie = () => {    // console.log(textInput);//handleSearch
+  const handleSearch = () => {    // console.log(textInput);
     
     setSearch(textInput);
     const ob = {apiKey: apiKey, textInput: textInput, dispatch: dispatch, addMovies: addMovies};
-    setTextInput('');
+    setTextInput('');    // console.log(search);    // console.log('Перед запуском fetchMovies');
+    // console.log(ob);     // fetchMovies(ob);
     dispatch(fetchMovies(ob));
   };
-
-    // Эффект для загрузки пользователей при монтировании компонента
-  useEffect(() => {
-    dispatch(fetchMovies());
-  }, [dispatch]);
-  
- 
 
   useEffect(() => { // - под вопросом.
     if (search === '') {
@@ -100,9 +100,9 @@ const HomePage = () => {
           placeholder='Название'
           autoComplete='off'
         />
-        <button onClick={searchForMovie}>Искать фильм</button>
+        <button onClick={handleSearch}>Искать фильм</button>
       </div>
-      <MovieSearchResult />
+      <Result />
     </>
   );
 };

@@ -17,7 +17,8 @@ const Result = () => {
     return <Loader />;
   } else if (movies === undefined) {
     return <NothingWasFound />;
-  } else if (movies[0]) {
+  }
+  //  else if (movies[0]) {
     
     return (
       <>
@@ -29,7 +30,7 @@ const Result = () => {
         </ul>
       </>
     );
-  };
+  // };
 }
 
 export default Result;

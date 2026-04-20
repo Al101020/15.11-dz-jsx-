@@ -1,7 +1,7 @@
 import { createSlice, current } from '@reduxjs/toolkit';
 import fetchDetailsMovie from '../api/fetchDetailsMovie';
 
-const initialState = {
+const initialState = { // Details
   detailsArr: [],
   isLoadingDetails: false,
   isErrorDetails: false,
@@ -18,31 +18,32 @@ export const detailsSlice = createSlice({
       console.log(current(state));//
     },
     upgradeDetails: (state, action) => {
-      console.log(action);
-      state.detailsArr = [action.payload];
+      state.details = [action.payload];
       console.log(current(state));//
     },
+    // details: (state, action) => {
+    //   state.details = [action.payload];
+    //   console.log(current(state));//
+    // },
   },
   extraReducers: (builder) => {
     builder
       // Обработка начала загрузки (pending)
-      .addCase(fetchDetailsMovie.pending, (state) => {        // console.log('pending');
+      .addCase(fetchDetailsMovie.pending, (state) => {
+        // console.log('pending');
         state.isLoadingDetails = true;
         state.isErrorDetails = false; // Сбрасываем флаг ошибки при новом запросе
         state.errorDetails = '';
       })
       // Обработка успешной загрузки (fulfilled)
-      .addCase(fetchDetailsMovie.fulfilled, (state, action) => {
-        console.log('Загрузка УСПЕШНА');
-        console.log(state);
-        console.log(action);
+      .addCase(fetchDetailsMovie.fulfilled, (state, action) => {// 
+        // console.log('Загрузка УСПЕШНА');        // console.log(state);
         state.isLoadingDetails = false;
         state.isErrorDetails = false;
         if (action.payload === undefined) {
           return;
         }
-        // state.movies = action.payload.Search;
-        state.detailsArr = action.payload;
+        state.movies = action.payload.Search;
       })
       // Обработка ошибки (rejected)
       .addCase(fetchDetailsMovie.rejected, (state, action) => {
@@ -58,6 +59,7 @@ export const selectDetails = (state) => state.detailsObj.detailsArr;//
 export const selectUpgradeDetails = (state) => state.detailsObj.upgradeDetails;
 
 export const { clearError, upgradeDetails } = detailsSlice.actions;
+
 
 export default detailsSlice.reducer;
 

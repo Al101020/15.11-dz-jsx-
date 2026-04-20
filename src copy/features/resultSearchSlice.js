@@ -1,4 +1,4 @@
-import { createSlice, current } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';// import { fetchAddMovies } from '../api/fetchData'
 import fetchMovies from '../api/fetchMovies';
 
 
@@ -8,8 +8,6 @@ const initialState = {
   isLoading: false,
   isError: false,
   error: '',
-  
-  detailsArr: [], //
 };
 
 export const moviesSlice = createSlice({
@@ -31,17 +29,12 @@ export const moviesSlice = createSlice({
     },
     addFavorite(state, action) {
       // Здесь можно добавить логику для проверки наличия элемента в массиве и его добавления
-      state.favorites.push(action.payload);      // console.log(current(state));//
+      state.favorites.push(action.payload);
+      console.log(current(state));//
     },
     removeFavorite(state, action) {
-      // Здесь удаления элемента из массива// console.log(action.payload.imdbID);
-      state.favorites = state.favorites.filter(item => item.imdbID !== action.payload.imdbID);
-      // console.log(current(state));//
-    },
-
-    upgradeDetails: (state, action) => {
-      console.log(action);
-      state.detailsArr = [action.payload];
+      // Здесь можно добавить логику для удаления элемента из массива
+      state.favorites = state.favorites.filter(item => item !== action.payload);
       console.log(current(state));//
     },
   },
@@ -71,14 +64,10 @@ export const moviesSlice = createSlice({
   },
 });
 
-export const selectMoviesObj = (state) => state.moviesObj;
-export const selectMovies = (state) => state.moviesObj.movies;
-export const selectFavorites = (state) => state.moviesObj.favorites;
-export const selectAddMovie = (state) => state.moviesObj.addMovie;
+export const selectMoviesObj = (state) => state.moviesObj;//
+export const selectMovies = (state) => state.moviesObj.movies;//
+export const selectAddMovie = (state) => state.moviesObj.addMovie;//
 
 export const { movies, addMovie, clearError } = moviesSlice.actions;
 export const { addFavorite, removeFavorite } = moviesSlice.actions;
-
-export const { upgradeDetails } = moviesSlice.actions; //
-
 export default moviesSlice.reducer;

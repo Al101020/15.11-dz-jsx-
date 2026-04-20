@@ -39,8 +39,6 @@ li {
   /* width: 300px; */
   height: 200px;
   border: 1px dotted black;
-
-  cursor: pointer;
 }
 
 .imgMovie {
@@ -83,6 +81,6 @@ li {
   background-color: hsl(120, 91%, 59%);
 }
 
-button {
+.divImgMovie {
   cursor: pointer;
 }
