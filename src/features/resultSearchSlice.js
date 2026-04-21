@@ -39,11 +39,11 @@ export const moviesSlice = createSlice({
       // console.log(current(state));//
     },
 
-    upgradeDetails: (state, action) => {
-      console.log(action);
-      state.detailsArr = [action.payload];
-      console.log(current(state));//
-    },
+    // upgradeDetails: (state, action) => {
+    //   console.log(action);
+    //   state.detailsArr = [action.payload];
+    //   console.log(current(state));//
+    // },
   },
   extraReducers: (builder) => {
     builder

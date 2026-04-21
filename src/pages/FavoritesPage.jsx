@@ -8,7 +8,7 @@ const FavoritesPage = () => {        // Выбираем favorites из стор
       <h1>Страница избранного</h1>
       <ul>
         {favorites.map((favorite) => (
-          <MovieFavorite key={favorite.imdbID} props={favorite} />
+          <MovieFavorite key={favorite.imdbID} favorite={favorite} favorites={favorites} />
         ))}
       </ul>
     </>

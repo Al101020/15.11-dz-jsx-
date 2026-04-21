@@ -11,6 +11,7 @@ import MovieHomePage from './MovieHomePage';
 
 const MovieSearchResult = () => {
   const movies = useSelector(selectMovies);
+  // console.log(movies);
   const moviesObj = useSelector(selectMoviesObj);
 
   const favorites = useSelector(selectFavorites);  // console.log(favorites);

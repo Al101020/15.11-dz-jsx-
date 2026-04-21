@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { addFavorite, removeFavorite } from '../features/resultSearchSlice';
 import { selectDetailsObj } from '../features/detailsSlice';
 import { selectDetails } from '../features/detailsSlice';
 import { upgradeDetails } from '../features/detailsSlice';
@@ -13,21 +14,40 @@ import LoaderDetails from './LoaderDetails';
 
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { selectFavorites } from '../features/resultSearchSlice';
+import { selectMovies } from '../features/resultSearchSlice';
 
 const DetalistPage = () => {
   const favorites = useSelector(selectFavorites);  // console.log(favorites);
+  const movies = useSelector(selectMovies);
+  // console.log(movies);
 
   const dispatch = useDispatch();
   const url = window.location.href;
   const imdbID = url.split('/:')[1];
 
   const detailsObj = useSelector(selectDetailsObj);
-  // console.log(detailsObj.details.Title);
+  // console.log(detailsObj);
   
   const details = useSelector(selectDetails);
   // console.log(details.Title);
 
 
+  
+
+  const objMovie = movies.find(item => item.imdbID === imdbID);
+  console.log(objMovie);
+
+  const addToFavorites = () => {
+    dispatch(addFavorite(objMovie));
+    console.log('Добавить в избранное');
+  };
+
+  const deleteFromFavorites = () => {
+    dispatch(removeFavorite(objMovie));    
+    console.log('Удалить из избранного');
+  };
+
+  //     Эффект для загрузки пользователей при монтировании компонента  
   const ob = {
     apiKey: '64405bd2',
     id: imdbID,
@@ -37,7 +57,6 @@ const DetalistPage = () => {
     // details: details,
   }
 
-  //     Эффект для загрузки пользователей при монтировании компонента
   useEffect(() => {
     dispatch(fetchDetailsMovie(ob));
   }, [dispatch]);
@@ -62,7 +81,6 @@ const DetalistPage = () => {
     );
   };
 
-  // if (favorites.some(favorite => favorite.imdbID === objMovie.imdbID)) {};
   if (detailsObj.details.Title) {
     console.log(favorites);
     if (favorites.some(favorite => favorite.imdbID === imdbID)) {
@@ -81,8 +99,7 @@ const DetalistPage = () => {
           <p>Language: <strong>{detailsObj.details.Language}</strong></p>
           <p>Plot: <strong>{detailsObj.details.Plot}</strong></p>
           <p>Writer: <strong>{detailsObj.details.Writer}</strong></p>
-          <button>Удалить из избранного</button>{/*  onClick={() => addToFavorites()} */}
-          {/* <p><a href={detailsObj.details.Poster}>{detailsObj.details.Poster}</a></p> */}
+          <button onClick={() => deleteFromFavorites()}>Удалить из избранного</button>
           <p><img src={detailsObj.details.Poster} alt='Плаката нет' /></p>
         </>
       );
@@ -102,19 +119,13 @@ const DetalistPage = () => {
           <p>Language: <strong>{detailsObj.details.Language}</strong></p>
           <p>Plot: <strong>{detailsObj.details.Plot}</strong></p>
           <p>Writer: <strong>{detailsObj.details.Writer}</strong></p>
-          <button>Добавить в избранные</button>{/*  onClick={() => addToFavorites()} */}
+          <button onClick={() => addToFavorites()}>Добавить в избранные</button>{/*  onClick={() => addToFavorites()} */}
           {/* <p><a href={detailsObj.details.Poster}>{detailsObj.details.Poster}</a></p>          // Poster // <a href="URL">Текст ссылки</a> */}
           <p><img src={detailsObj.details.Poster} alt='Плаката нет' /></p>
         </>
       );
     };
-  }
-
-  // return (
-  //   <>
-  //     <h1>Страница деталей фильма</h1>
-  //   </>
-  // );
+  };
 };
 
 export default DetalistPage;

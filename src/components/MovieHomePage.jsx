@@ -10,7 +10,7 @@ function MovieHomePage(props) {  // const favorites = Array.from(props.favorites
   const favorites = props.favorites;
   
   const objMovie = props.movie;
-  // console.log(objMovie);
+  console.log(objMovie);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();// --- 
