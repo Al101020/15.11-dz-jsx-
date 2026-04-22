@@ -16,7 +16,6 @@ import { selectMovies } from '../features/resultSearchSlice';
 const DetalistPage = () => {
   const varObj = {};
   const favorites = useSelector(selectFavorites);
-  // console.log(favorites); // ---
   const movies = useSelector(selectMovies);
 
   const dispatch = useDispatch();
@@ -25,42 +24,32 @@ const DetalistPage = () => {
 
   const detailsObj = useSelector(selectDetailsObj);
   const details = useSelector(selectDetails);
-  // console.log(details); // ---
 
   const objMovie = movies.find(item => item.imdbID === imdbID);
-  // const objFavorites = favorites.find(item => item.imdbID === imdbID);
 
   const addToFavorites = () => {
-    const objFavorites = favorites.find(item => item.imdbID === imdbID); // ---
-    console.log(favorites);
+    const objFavorites = favorites.find(item => item.imdbID === imdbID);
 
     if (!objMovie === undefined) {
-      console.log(objMovie);
       dispatch(addFavorite(objMovie));
     } else if (!objFavorites === undefined) {
-      console.log(objFavorites);
       dispatch(addFavorite(objFavorites));
-    } else {
-      // console.log(varObj.delObjFavorites);
-      
+    } else {      
       const obj = {}
       obj.Poster = details.Poster;
       obj.Title = details.Title;
       obj.Type = details.Type;
       obj.Year = details.Year;
       obj.imdbID = details.imdbID;
-      console.log(obj);
       dispatch(addFavorite(obj));
     };
   };
 
   const deleteFromFavorites = () => {
-    const objFavorites = favorites.find(item => item.imdbID === imdbID); // ---
-    console.log(objFavorites);
+    const objFavorites = favorites.find(item => item.imdbID === imdbID);
     varObj.delObjFavorites = objFavorites;
     dispatch(removeFavorite(objFavorites));
   };
-
 
   //     Эффект для загрузки пользователей при монтировании компонента  
   const ob = {
@@ -93,7 +82,6 @@ const DetalistPage = () => {
   };
 
   if (detailsObj.details.Title) {
-    console.log(favorites);
     if (favorites.some(favorite => favorite.imdbID === imdbID)) {
       return (
         <>

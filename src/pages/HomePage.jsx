@@ -19,8 +19,7 @@ const HomePage = () => {
   const { movies: movies, favorites: favorites, isLoading, isError,
     error } = useSelector((state) => state.moviesObj);
 
-     const handleChangeSearch = (e) => {     // e.preventDefault();
-    
+     const handleChangeSearch = (e) => {
     const valueInput = e.target.value;
     setTextInput(valueInput);
 

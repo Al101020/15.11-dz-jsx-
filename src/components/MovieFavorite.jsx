@@ -9,16 +9,14 @@ import { useNavigate } from 'react-router-dom';
 
 import { addFavorite, removeFavorite } from '../features/resultSearchSlice';
 
-function MovieFavorite(props) {  // console.log(props);
+function MovieFavorite(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
 
   const objMovie = props.favorite;
   const deleteFromFavorites = () => {
     dispatch(removeFavorite(objMovie));
   };
-
       // Эффект для загрузки пользователей при монтировании компонента
   useEffect(() => {
     dispatch(fetchDetailsMovie());
@@ -27,7 +25,7 @@ function MovieFavorite(props) {  // console.log(props);
   return (
     <>
       <li className='liMovie'>
-        <div className='divImgMovie' onClick={(e) => handleDetailsMovie(e, navigate)}>
+        <div className='divImgMovie' onClick={(e) => handleDetailsMovie(e, navigate, dispatch, objMovie)}>
           <img className='imgMovie' src={props.favorite.Poster} alt={props.favorite.Poster} />
         </div>
         <div className='divTitleMovie'>

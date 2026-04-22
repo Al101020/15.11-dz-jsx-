@@ -18,7 +18,6 @@ export const detailsSlice = createSlice({
       console.log(current(state));
     },
     upgradeDetails: (state, action) => {
-      console.log(action);
       state.details = [action.payload];
     },
   },
@@ -55,10 +54,3 @@ export const selectUpgradeDetails = (state) => state.detailsObj.upgradeDetails;
 export const { clearError, upgradeDetails } = detailsSlice.actions;
 
 export default detailsSlice.reducer;
-
-
-
-
-// export const selectAddMovie = (state) => state.moviesObj.addMovie;//
-// export const { movies, addMovie, clearError } = moviesSlice.actions;
-// export const { addFavorite, removeFavorite } = moviesSlice.actions;
