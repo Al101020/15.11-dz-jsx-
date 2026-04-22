@@ -15,33 +15,28 @@ export const detailsSlice = createSlice({
     clearError: (state, action) => {
       state.isErrorDetails = false;
       state.errorDetails = '';
-      console.log(current(state));//
+      console.log(current(state));
     },
     upgradeDetails: (state, action) => {
-      // console.log(action);
+      console.log(action);
       state.details = [action.payload];
-      // console.log(current(state));//
     },
   },
   extraReducers: (builder) => {
     builder
       // Обработка начала загрузки (pending)
-      .addCase(fetchDetailsMovie.pending, (state) => {        // console.log('pending');
+      .addCase(fetchDetailsMovie.pending, (state) => {
         state.isLoadingDetails = true;
         state.isErrorDetails = false; // Сбрасываем флаг ошибки при новом запросе
         state.errorDetails = '';
       })
       // Обработка успешной загрузки (fulfilled)
       .addCase(fetchDetailsMovie.fulfilled, (state, action) => {
-        // console.log('Загрузка УСПЕШНА');
-        // console.log(state);
-        // console.log(action);
         state.isLoadingDetails = false;
         state.isErrorDetails = false;
         if (action.payload === undefined) {
           return;
         }
-        // state.movies = action.payload.Search;
         state.details = action.payload;
       })
       // Обработка ошибки (rejected)

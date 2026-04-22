@@ -9,21 +9,21 @@ import { useNavigate } from 'react-router-dom';
 
 import { addFavorite, removeFavorite } from '../features/resultSearchSlice';
 
-function MovieFavorite(props) {
-  console.log(props);
+function MovieFavorite(props) {  // console.log(props);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
 
   const objMovie = props.favorite;
   const deleteFromFavorites = () => {
-    dispatch(removeFavorite(objMovie));    // console.log('Удалить из избранного');
+    dispatch(removeFavorite(objMovie));
   };
 
       // Эффект для загрузки пользователей при монтировании компонента
-  // useEffect(() => {
-  //   dispatch(fetchDetailsMovie());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchDetailsMovie());
+  }, [dispatch]);
+
   return (
     <>
       <li className='liMovie'>

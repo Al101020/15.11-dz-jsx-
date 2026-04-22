@@ -23,35 +23,27 @@ li {
   text-align: left;
 }
 
-
-
 .liMovie {
   border: 1px solid black;
   margin-bottom: 15px;
   background-color: hsl(120, 91%, 59%);
-  /* text-align: left; */
   display: flex;
-
 }
 
 .divImgMovie {
   min-width: 150px;
-  /* width: 300px; */
   height: 200px;
   border: 1px dotted black;
-
   cursor: pointer;
 }
 
 .imgMovie {
-  /* width: 300px; */
   height: 200px;
 }
 
 .divTitleMovie {
   padding: 5px 15px 5px 15px;
 }
-
 
 .displayNone {
   display: none;

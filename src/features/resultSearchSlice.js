@@ -1,15 +1,15 @@
 import { createSlice, current } from '@reduxjs/toolkit';
 import fetchMovies from '../api/fetchMovies';
 
+const savedState = localStorage.getItem('movieFavorites');
+const savedStateJsonParse = JSON.parse(savedState);
 
 const initialState = {
   movies: [],
-  favorites: [],
+  favorites: [...savedStateJsonParse],
   isLoading: false,
   isError: false,
   error: '',
-  
-  detailsArr: [], //
 };
 
 export const moviesSlice = createSlice({
@@ -19,31 +19,21 @@ export const moviesSlice = createSlice({
     clearError: (state, action) => {
       state.isError = false;
       state.error = '';
-      console.log(current(state));//
     },    
     addMovie: (state, action) => {
       state.movies = [...state.movies, action.payload];
-      console.log(current(state));//
     },
     movies: (state, action) => {
       state.movies = action.payload;
-      console.log(current(state));//
     },
     addFavorite(state, action) {
       // Здесь можно добавить логику для проверки наличия элемента в массиве и его добавления
-      state.favorites.push(action.payload);      // console.log(current(state));//
+      state.favorites.push(action.payload);
     },
     removeFavorite(state, action) {
-      // Здесь удаления элемента из массива// console.log(action.payload.imdbID);
+      // Здесь удаления элемента из массива
       state.favorites = state.favorites.filter(item => item.imdbID !== action.payload.imdbID);
-      // console.log(current(state));//
     },
-
-    // upgradeDetails: (state, action) => {
-    //   console.log(action);
-    //   state.detailsArr = [action.payload];
-    //   console.log(current(state));//
-    // },
   },
   extraReducers: (builder) => {
     builder
@@ -54,7 +44,7 @@ export const moviesSlice = createSlice({
         state.error = '';
       })
       // Обработка успешной загрузки (fulfilled)
-      .addCase(fetchMovies.fulfilled, (state, action) => {// console.log('Загрузка УСПЕШНА');
+      .addCase(fetchMovies.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
         if (action.payload === undefined) {
@@ -78,7 +68,5 @@ export const selectAddMovie = (state) => state.moviesObj.addMovie;
 
 export const { movies, addMovie, clearError } = moviesSlice.actions;
 export const { addFavorite, removeFavorite } = moviesSlice.actions;
-
-export const { upgradeDetails } = moviesSlice.actions; //
 
 export default moviesSlice.reducer;

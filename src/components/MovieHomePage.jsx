@@ -1,33 +1,52 @@
 import { useDispatch } from 'react-redux';
 import { addFavorite, removeFavorite } from '../features/resultSearchSlice';
+import { upgradeDetails } from '../features/detailsSlice';
 import handleDetailsMovie from './handleDetailsMovie';
-// import fetchDetailsMovie from '../api/fetchDetailsMovie';
 
-import { useNavigate } from 'react-router-dom';// ---
+import { useNavigate } from 'react-router-dom';
 
 
-function MovieHomePage(props) {  // const favorites = Array.from(props.favorites);
+function MovieHomePage(props) {
+  // console.log(props);
+  
   const favorites = props.favorites;
   
-  const objMovie = props.movie;
-  console.log(objMovie);
+  const objMovie = props.movie;  
+  // console.log(objMovie);// --- 
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();// --- 
+  const navigate = useNavigate();
 
   const addToFavorites = () => {
     dispatch(addFavorite(objMovie));
   };
 
   const deleteFromFavorites = () => {
-    dispatch(removeFavorite(objMovie));    // console.log('Удалить из избранного');
+    console.log('Удалить из избранного');
+    console.log(objMovie);
+    dispatch(removeFavorite(objMovie));
   };
 
   if (favorites.some(favorite => favorite.imdbID === objMovie.imdbID)) {
     return (
       <>
         <li className='liMovie'>
-          <div className='divImgMovie' onClick={(e) => handleDetailsMovie(e, navigate)}>
+          {/* <div className='divImgMovie' onClick={(e) => {
+              e.preventDefault();
+              // console.log('--- handleDetailsMovie ---');
+              // console.log(dispatch);  // undefined
+            
+              dispatch(upgradeDetails(objMovie));
+            
+            // const handleDetailsMovie = (e, navigate) => {
+              // e.preventDefault();
+              // console.log('--- handleDetailsMovie ---');
+              const li = e.target.closest('.liMovie');
+              const imdbID = li.children[2].textContent;
+              navigate(`/movie/:${imdbID}`);
+            }
+          }> */}
+          <div className='divImgMovie' onClick={(e) => handleDetailsMovie(e, navigate, dispatch, objMovie)}>
             <img className='imgMovie' src={props.movie.Poster} alt='Плаката нет' />
           </div>
           <div className='divTitleMovie'>
@@ -43,7 +62,7 @@ function MovieHomePage(props) {  // const favorites = Array.from(props.favorites
   return (
     <>
       <li className='liMovie'>
-        <div className='divImgMovie' onClick={(e) => handleDetailsMovie(e, navigate)}>
+        <div className='divImgMovie' onClick={(e) => handleDetailsMovie(e, navigate, dispatch, objMovie)}>
           <img className='imgMovie' src={props.movie.Poster} alt='Плаката нет' />
         </div>
         <div className='divTitleMovie'>

@@ -3,14 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectAddMovie } from '../features/resultSearchSlice';
 import fetchMovies from '../api/fetchMovies';
 import MovieSearchResult from '../components/MovieSearchResult';
-
 import { selectMoviesObj } from '../features/resultSearchSlice';
 
-// import store from '../app/store';
-// console.log(store.getState());// начальное состояние пустое
-
 const varObj = {};
-
 const apiKey = '64405bd2'; // API-ключ
 
 const HomePage = () => {
@@ -27,7 +22,7 @@ const HomePage = () => {
      const handleChangeSearch = (e) => {     // e.preventDefault();
     
     const valueInput = e.target.value;
-    setTextInput(valueInput);    // console.log(textInput);
+    setTextInput(valueInput);
 
     const input = e.target;// console.log(input);
     // Добавляем обработчик события keypress
@@ -45,20 +40,16 @@ const HomePage = () => {
         const ob = {
           apiKey: apiKey,
           textInput: varObj.valueInput,
-          // dispatch: dispatch,
-          // addMovies: addMovies
-        };        // console.log(ob);
+        };
 
         if (ob.textInput) {
           dispatch(fetchMovies(ob));
-          // console.log(store.getState());// нет ни чего
         };
       };
     });
   };
 
-  const searchForMovie = () => {    // console.log(textInput);//handleSearch
-    
+  const searchForMovie = () => {
     setSearch(textInput);
     const ob = {apiKey: apiKey, textInput: textInput, dispatch: dispatch, addMovies: addMovies};
     setTextInput('');
@@ -69,8 +60,6 @@ const HomePage = () => {
   useEffect(() => {
     dispatch(fetchMovies());
   }, [dispatch]);
-  
- 
 
   useEffect(() => { // - под вопросом.
     if (search === '') {
